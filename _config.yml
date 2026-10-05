@@ -1,0 +1,5 @@
+title: Seen from Space
+description: "Support, privacy policy and terms of use for Seen from Space: Satellite Map"
+baseurl: /seen-from-space-support
+exclude:
+  - README.md
