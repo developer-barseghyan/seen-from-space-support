@@ -3,3 +3,4 @@ description: "Support, privacy policy and terms of use for Seen from Space: Sate
 baseurl: /seen-from-space-support
 exclude:
   - README.md
+  - _backup-2026-10-05

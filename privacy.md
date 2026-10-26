@@ -8,7 +8,7 @@ permalink: /privacy
 
 **Seen from Space: Satellite Map**
 
-Effective date: 5 October 2026<br>
+Effective date: 26 October 2026 (version 1.1)<br>
 Developer: Tigran Barseghyan<br>
 Contact: **developer.barseghyan@gmail.com**
 
@@ -20,7 +20,7 @@ Contact: **developer.barseghyan@gmail.com**
 >
 > The app sends anonymous usage statistics to Google Firebase Analytics. They never contain your points, their names or their coordinates.
 >
-> To show images of a point, the app asks a public satellite image catalog for that area. That request necessarily contains an approximate location.
+> To show images of a point, the app asks public image services (Microsoft Planetary Computer, and for US aerial photos also USGS) for that area. Those requests necessarily contain an approximate location.
 >
 > Nothing is sold, and nothing is used for advertising or for tracking you across other apps.
 
@@ -52,12 +52,30 @@ The app refreshes this data when opened if it is more than six hours old, and in
 
 After a Sentinel-2 pass over a point, the app looks for the image itself, directly from public sources and not through any server of mine.
 
-- It searches **Earth Search** (earth-search.aws.element84.com), a public catalog run by Element 84 on Amazon Web Services. **The request contains a box of about 2 × 2 km around the point and a range of dates.** It contains no point name, no identifier and no account.
-- It then downloads the part of the image around the point from the public **AWS Open Data** bucket for Sentinel-2 (Amazon S3). These requests name the Sentinel-2 tile (about 110 km across) and the portion of the file that is needed.
+- It searches **Earth Search** (earth-search.aws.element84.com), a public catalog run by Element 84 on Amazon Web Services. **The request contains a box of about 2 × 2 km around the point and a range of dates.**
+- It then asks **Microsoft Planetary Computer** (planetarycomputer.microsoft.com) for the same Sentinel-2 scene and for the image window around the point: **a box of 5 km or 15 km around the point**, or a smaller box around the area you zoom into. This happens for points anywhere in the world.
+- If Planetary Computer cannot answer and you are on Wi-Fi, the app reads the same window from the public **AWS Open Data** bucket for Sentinel-2 (Amazon S3). These requests name the Sentinel-2 tile (about 110 km across) and the portion of the file that is needed.
 
-Stated plainly: the catalog operator and Amazon Web Services can see an approximate location you are interested in, together with your IP address, as a map or weather service would. They are not told who you are, and the point may be anywhere on Earth, not where you are.
+None of these requests contains a point name, an identifier or an account.
 
-The app repeats the search for up to 48 hours after a pass, also in the background. Downloaded images are cached on your device and can be cleared in **Settings → Data → Image cache**.
+## Vegetation view
+
+When you open the vegetation view of an image (also in its trend, in Compare or in a timelapse), the app asks **Microsoft Planetary Computer** for two small images of the same 5 km box around the point: the vegetation index and the scene classification (which marks cloud and water). On Wi-Fi, if Planetary Computer cannot answer, it reads the same bands from the AWS Sentinel-2 bucket. The vegetation index is computed for display only and stays on your device.
+
+## Aerial photos (United States only)
+
+For a point in the United States, the app shows aerial photos from the US Department of Agriculture's NAIP programme.
+
+- It searches **Microsoft Planetary Computer** for the photos available there, with **a box of about 15 × 15 km around the point**, and asks it for photo crops around the point (5 km or 15 km across, or a smaller box around the area you zoom into).
+- If Planetary Computer has no photo or does not answer, it asks **USGS The National Map** (imagery.nationalmap.gov) for the same crops and for the year of the photo under the point.
+
+To decide whether a point is in the United States, the app uses the country Apple's geocoder returns for the point (see below), at most once a month per point. For points outside the United States these requests are never made.
+
+## What image services can see
+
+Stated plainly: Element 84, Microsoft, Amazon Web Services and, for US points, the USGS can see an approximate location you are interested in, together with your IP address, as a map or weather service would. They are not told who you are, and the point may be anywhere on Earth, not where you are. Each runs these services under its own privacy terms.
+
+The app repeats the Sentinel-2 search for up to 48 hours after a pass, also in the background, and may download the newest image of your selected point in advance so that it opens instantly. Downloaded images are cached on your device and can be cleared in **Settings → Data → Image cache**.
 
 ## Map, place search and country lookup
 
@@ -78,10 +96,12 @@ The app uses **Google Firebase Analytics** to measure how its features are used,
 - that a pass was opened, with the satellite's group, sensor type and pass class
 - how long the timeline took to compute and how many passes it found
 - whether orbital data refreshed successfully, and how long it took
-- whether notifications are on, and that a notification was opened
+- whether pass alerts and new image alerts are on, and that a notification was opened
 - which public imagery site was opened (the mission name only)
+- which image features are used: opening an image, the full-screen viewer, zoom buttons, Compare (including the free comparison), Timelapse and its export format, the vegetation view, its trend and change map, aerial photos and the year chosen, and sharing a PDF report
+- how a satellite image or aerial photo was loaded (which service answered, the resolution, the size and the time it took), never which area
 - which Pro feature was tapped, whether the purchase screen was shown, which plan was selected (with its price and currency) and how the purchase or restore ended
-- which settings you change, and your current ones: units, whether you have Pro, whether notifications are on, and a rough count of your points (1, 2 to 3, 4 or more)
+- which settings you change, and your current ones: units, whether you have Pro, whether pass alerts and new image alerts are on, and a rough count of your points (1, 2 to 3, 4 or more)
 
 Firebase also records standard technical information on its own: device model, iOS version, app version, language, and an approximate region derived from your IP address on Google's servers. The IP address itself is not stored in the reports.
 
@@ -105,15 +125,20 @@ Pro subscriptions and the lifetime purchase are processed **entirely by Apple** 
 
 ## Notifications
 
-Reminders are **local notifications** scheduled on your device. They are not sent through any server. Their text contains the satellite, the kind of pass, the time and the name you gave the point, never coordinates.
+All notifications are **local**: they are scheduled or posted by the app on your device, not sent through any server.
+
+- **Pass alerts** contain the satellite, the kind of pass, the time and the name you gave the point.
+- **New image alerts** are posted when the app, checking in the background, finds a new Sentinel-2 image of a saved point. They contain the point's name, the satellite and the cloud cover.
+
+Neither ever contains coordinates.
 
 ## Photos
 
-**Save to Photos** asks for permission to add an image to your library. The permission is "add only": the app cannot read your photos.
+**Save** (on an image) and saving a timelapse ask for permission to add a file to your library. The permission is "add only": the app cannot read your photos.
 
 ## Sharing and export
 
-**Share** and **Export CSV** create an image, a text or a file from your own data and open the standard iOS share sheet. The content goes only where you send it. The developer never sees it.
+**Share**, timelapse export (video or GIF), PDF reports and **Export CSV** create a file from your own data and open the standard iOS share sheet. A PDF report includes the point's name and coordinates, because that is what makes it useful to the person you send it to. The content goes only where you send it. The developer never sees it.
 
 ## What the app does not do
 

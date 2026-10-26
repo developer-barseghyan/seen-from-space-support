@@ -8,7 +8,7 @@ permalink: /terms
 
 **Seen from Space: Satellite Map**
 
-Effective date: 5 October 2026<br>
+Effective date: 26 October 2026 (version 1.1)<br>
 Developer: Tigran Barseghyan<br>
 Contact: **developer.barseghyan@gmail.com**
 
@@ -29,23 +29,27 @@ By downloading or using the app you agree to these terms. If you do not agree, p
 
 ## 2. What the app does
 
-It computes when Earth-imaging satellites pass over the points you save, judges whether each pass can produce an image, and shows the publicly available Sentinel-2 images of those points.
+It computes when Earth-imaging satellites pass over the points you save, judges whether each pass can produce an image, shows the publicly available Sentinel-2 images of those points, and, for points in the United States, the publicly available USDA NAIP aerial photos. It can compare dates, play images as a timelapse, show a vegetation index and produce a PDF report from them.
 
 It is not a tasking tool, not an archive search, not a live view of the Earth, and not a substitute for the operators' own coverage tools.
 
-## 3. Satellite images
+## 3. Images, aerial photos and the vegetation view
 
-The images shown in the app are **Copernicus Sentinel-2 data**, published by the European Union's Copernicus programme under free, full and open terms, and read from the AWS Open Data programme. The app crops and renders them, so what you see is modified Copernicus Sentinel data.
+The satellite images shown in the app are **Copernicus Sentinel-2 data**, published by the European Union's Copernicus programme under free, full and open terms, rendered by Microsoft Planetary Computer or read from the AWS Open Data programme. The app crops and renders them, so what you see is modified Copernicus Sentinel data.
 
-- You may save and share the images. When you do, keep the attribution the app adds: **"Contains modified Copernicus Sentinel data"** with the year.
-- The images are provided by their publishers without warranty. They may be cloudy, late, missing, or replaced by a lower-resolution preview; the app says so when it uses a preview.
-- At 10 metres per pixel the images do not show people, vehicles or the details of a home. You remain responsible for how you use and share any image.
+The aerial photos shown for points in the United States are **USDA NAIP** imagery, a public-domain product of the US Department of Agriculture, obtained through Microsoft Planetary Computer or USGS The National Map. Each photo is dated with its flight year and may be several years old.
+
+- You may save and share the images, timelapses and reports. When you do, keep the attributions the app adds, such as **"Contains modified Copernicus Sentinel data"** with the year and **"USDA NAIP"**.
+- The images are provided by their publishers without warranty. They may be cloudy, late, missing, misaligned by a pixel or two, or replaced by a lower-resolution preview; the app says so when it uses a preview.
+- The **vegetation view** (NDVI) is a general index computed from two bands of the image. It is affected by cloud, haze, season and soil and does not identify crops or species or assess the health of any plant.
+- **Nothing the app shows, including a PDF report, is a survey, an inspection, an appraisal or a valuation**, or evidence of a property's boundaries, condition, use or ownership.
+- Satellite images at 10 metres per pixel do not show people, vehicles or the details of a home. Aerial photos at 0.3 to 0.6 metres per pixel can show buildings, vehicles and yards as they were on the flight date. You remain responsible for how you use and share any image, and for respecting other people's privacy and the law where you are.
 
 Imagery from commercial satellites is not public, and the app never shows it.
 
 ## 4. Independence
 
-Seen from Space is published by an independent developer. It is not affiliated with, endorsed by or a product of the European Space Agency, the European Union, NASA, USGS, NOAA, Maxar, Airbus, Planet, ICEYE, Capella or any other agency or operator named in it. Mission and satellite names belong to their owners and are used only to identify the satellites.
+Seen from Space is published by an independent developer. It is not affiliated with, endorsed by or a product of the European Space Agency, the European Union, NASA, USGS, USDA, NOAA, Microsoft, Maxar, Airbus, Planet, ICEYE, Capella or any other agency, company or operator named in it. Mission and satellite names belong to their owners and are used only to identify the satellites.
 
 ## 5. Your content
 
@@ -53,9 +57,9 @@ The points you save and everything attached to them remain yours and are stored 
 
 ## 6. Purchases
 
-The app is free to download. Passes of Sentinel-2 and Landsat over one saved point, and the most recent images of that point, are free.
+The app is free to download. The free version includes one saved point, the passes of Sentinel-2 and Landsat over it, its three most recent images, new image alerts, one comparison of two dates, the newest aerial photo for US points and the vegetation view of the newest clear image.
 
-**Seen from Space Pro** unlocks all satellites, unlimited points, notifications, a longer history, the full image gallery, a larger image area, comparing dates and export. It is offered as:
+**Seen from Space Pro** unlocks all satellites, unlimited points, pass alerts, a longer history and every image in it, unlimited comparisons, every aerial year, the full vegetation view with its trend and change map, a larger image area, exports without the large wordmark, and CSV export. It is offered as:
 
 - a **monthly subscription**
 - an **annual subscription**
@@ -75,7 +79,7 @@ Ending Pro returns the app to its free capabilities. **It never deletes the poin
 
 ## 7. Third-party services
 
-The app depends on services the developer does not control: public sources of orbital data (CelesTrak and the mirror tle.ivanstanojevic.me), the Sentinel-2 catalog and image archive on Amazon Web Services, Apple Maps, and the public imagery sites it links to (Copernicus Browser, NASA Worldview, USGS EarthExplorer). Any of them may change, slow down or stop. When that happens, parts of the app may show older data or no data until the service returns. A subscription pays for the app's features, not for the availability of those services.
+The app depends on services the developer does not control: public sources of orbital data (CelesTrak and the mirror tle.ivanstanojevic.me), the Sentinel-2 catalog and image archive on Amazon Web Services, Microsoft Planetary Computer, USGS The National Map, Apple Maps, and the public imagery sites it links to (Copernicus Browser, NASA Worldview, USGS EarthExplorer). Any of them may change, slow down or stop. When that happens, parts of the app may show older data or no data until the service returns. A subscription pays for the app's features, not for the availability of those services.
 
 ## 8. Acceptable use
 

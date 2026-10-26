@@ -6,51 +6,49 @@
 <title>{{ page.title | default: site.title }}</title>
 <meta name="description" content="{{ site.description | escape }}">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#e8eefa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141d30" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070B16" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/favicon.png">
 <link rel="apple-touch-icon" href="{{ site.baseurl }}/assets/icon.png">
 <style>
-/* Colours are the app's own tokens (Assets.xcassets/Tokens), light and dark. */
+/* Colours follow the app's "Field notes" tokens (Theme.swift): warm ground,
+   ivory text, one amber accent. The header carries the app icon's night sky. */
 :root{
-  --bg:#f4f5f7;
-  --bg-top:#e8eefa;
-  --surface:#ffffff;
-  --surface2:#e8ebf0;
-  --text:#111318;
-  --text2:#4d5563;
-  --text3:#626c7e;
-  --divider:#e4e7ec;
-  --accent:#1457d6;
-  --on-accent:#ffffff;
-  --accent-fill:rgba(20,87,214,.08);
-  --accent-border:rgba(20,87,214,.28);
-  --navy:#122f81;
-  --success:#1b6f3f;
-  --warning:#8a5a14;
-  --neutral:#4d5563;
-  --chip:rgba(255,255,255,.7);
-  --shadow:0 1px 2px rgba(18,47,129,.05), 0 10px 30px rgba(18,47,129,.08);
+  --bg:#F3EFE6;
+  --sky-top:#070B16;
+  --sky-bottom:#1B2847;
+  --surface:#FFFFFF;
+  --surface2:#EAE5DA;
+  --text:#0C0C0B;
+  --text2:#5C584F;
+  --text3:#716C63;
+  --divider:rgba(12,12,11,.09);
+  --accent:#885813;
+  --on-accent:#F3EFE6;
+  --accent-fill:rgba(136,88,19,.08);
+  --accent-border:rgba(136,88,19,.26);
+  --success:#256F3B;
+  --warning:#885813;
+  --neutral:#716C63;
+  --shadow:0 1px 2px rgba(12,12,11,.04), 0 12px 32px rgba(12,12,11,.07);
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#0e1218;
-    --bg-top:#141d30;
-    --surface:#171c24;
-    --surface2:#262d38;
-    --text:#f1f3f6;
-    --text2:#a3acba;
-    --text3:#868e9b;
-    --divider:#2a3240;
-    --accent:#709cf6;
-    --on-accent:#0e1218;
-    --accent-fill:rgba(112,156,246,.10);
-    --accent-border:rgba(112,156,246,.32);
-    --success:#4ccb84;
-    --warning:#f5b94a;
-    --neutral:#a3acba;
-    --chip:rgba(255,255,255,.06);
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.28);
+    --bg:#0C0C0B;
+    --surface:#161614;
+    --surface2:#1F1F1C;
+    --text:#F3EFE6;
+    --text2:#B9B3A6;
+    --text3:#8A857B;
+    --divider:rgba(243,239,230,.08);
+    --accent:#F2B544;
+    --on-accent:#0C0C0B;
+    --accent-fill:rgba(242,181,68,.10);
+    --accent-border:rgba(242,181,68,.30);
+    --success:#5BD67A;
+    --warning:#F2B544;
+    --neutral:#8A857B;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 12px 32px rgba(0,0,0,.35);
   }
 }
 *{box-sizing:border-box}
@@ -59,35 +57,40 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--text);
-  background-color:var(--bg);
-  background-image:linear-gradient(180deg, var(--bg-top) 0, var(--bg) 420px);
-  background-repeat:no-repeat;
+  background:var(--bg);
   font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 
+/* Night-sky band behind the header, as in the app icon and store screenshots. */
+.sky{
+  background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-bottom) 100%);
+  padding-bottom:64px;
+  margin-bottom:-40px;
+}
 .wrap{max-width:46rem;margin:0 auto;padding:0 18px}
 
-header.bar{padding:34px 0 22px;text-align:center}
+header.bar{padding:36px 0 8px;text-align:center;color:#F3EFE6}
 header.bar .icon{
   display:block;
-  width:76px;height:76px;
-  margin:0 auto 14px;
+  width:80px;height:80px;
+  margin:0 auto 16px;
   border-radius:22.5%;
-  box-shadow:0 6px 18px rgba(18,47,129,.22);
+  box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08);
 }
-header.bar .app,h1,h2,h3{
-  font-family:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+h1,h2,header.bar .app{
+  font-family:ui-serif,"New York",Georgia,"Times New Roman",serif;
+  font-weight:400;
 }
 header.bar .app{
   margin:0;
-  font-size:1.4rem;
-  font-weight:700;
-  letter-spacing:-0.015em;
+  font-size:2rem;
+  letter-spacing:-0.01em;
+  line-height:1.15;
 }
 header.bar .sub{
-  margin:2px 0 0;
-  color:var(--text3);
-  font-size:.9rem;
+  margin:4px 0 0;
+  color:#B9C3D9;
+  font-size:.92rem;
 }
 
 nav{
@@ -95,39 +98,47 @@ nav{
   justify-content:center;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:18px;
+  margin-top:20px;
 }
 nav a{
   display:inline-block;
   padding:7px 17px;
-  border-radius:999px;
-  background:var(--chip);
-  color:var(--text2);
+  border-radius:12px;
+  background:rgba(243,239,230,.08);
+  border:1px solid rgba(243,239,230,.14);
+  color:#D9DEE8;
   text-decoration:none;
   font-size:.9rem;
   font-weight:500;
   transition:color .15s, background .15s;
 }
-nav a:hover{color:var(--accent)}
+nav a:hover{color:#F2B544}
 nav a.here,nav a.here:hover{
-  background:var(--accent);
-  color:var(--on-accent);
+  background:rgba(242,181,68,.16);
+  border-color:rgba(242,181,68,.45);
+  color:#F2B544;
   font-weight:600;
-  box-shadow:0 4px 10px rgba(0,0,0,.10);
 }
 
 main.card{
+  position:relative;
   background:var(--surface);
-  border-radius:24px;
+  border-radius:16px;
   box-shadow:var(--shadow);
   padding:38px 34px 34px;
   margin-bottom:26px;
 }
+@media (prefers-color-scheme: dark){
+  main.card{border:1px solid var(--divider)}
+}
 
 main.card > :first-child{margin-top:0}
-h1{font-size:1.85rem;line-height:1.25;letter-spacing:-0.02em;margin:0 0 .65em;font-weight:700}
-h2{font-size:1.26rem;margin:2.1em 0 .5em;letter-spacing:-0.01em;font-weight:700}
-h3{font-size:1.04rem;margin:1.9em 0 .4em;font-weight:650}
+h1{font-size:2.2rem;line-height:1.15;letter-spacing:-0.01em;margin:0 0 .6em}
+h2{font-size:1.5rem;line-height:1.25;margin:2em 0 .45em;letter-spacing:-0.005em}
+h3{
+  font-size:1.02rem;margin:1.9em 0 .4em;font-weight:650;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
 p,li{overflow-wrap:break-word}
 main.card p,main.card li{color:var(--text2)}
 main.card strong{color:var(--text)}
@@ -150,27 +161,28 @@ blockquote{
   margin:1.4em 0;
   padding:.85em 1.1em;
   border:1px solid var(--accent-border);
-  border-radius:14px;
+  border-radius:12px;
   background:var(--accent-fill);
 }
 blockquote p{margin:.35em 0}
 main.card blockquote p{color:var(--text)}
 
-/* Pass classes, as the app shows them */
+/* Pass classes, as the app shows them: a dot and a word */
 .tag{
-  display:inline-block;
-  padding:.08em .55em;
-  border-radius:999px;
-  font-size:.74em;
+  display:inline-flex;
+  align-items:center;
+  gap:.4em;
+  font-size:.78em;
   font-weight:700;
-  letter-spacing:.03em;
+  letter-spacing:.04em;
   white-space:nowrap;
-  vertical-align:.08em;
-  border:1px solid;
+  vertical-align:.06em;
+  margin-right:.3em;
 }
-.tag.will{color:var(--success);background:color-mix(in srgb,var(--success) 12%,transparent);border-color:color-mix(in srgb,var(--success) 30%,transparent)}
-.tag.can{color:var(--warning);background:color-mix(in srgb,var(--warning) 12%,transparent);border-color:color-mix(in srgb,var(--warning) 30%,transparent)}
-.tag.pass{color:var(--neutral);background:color-mix(in srgb,var(--neutral) 10%,transparent);border-color:color-mix(in srgb,var(--neutral) 28%,transparent)}
+.tag::before{content:"";width:.55em;height:.55em;border-radius:50%;background:currentColor}
+.tag.will{color:var(--success)}
+.tag.can{color:var(--warning)}
+.tag.pass{color:var(--neutral)}
 
 .table-scroll{overflow-x:auto}
 table{border-collapse:separate;border-spacing:0;width:100%;margin:1.3em 0;font-size:.94rem}
@@ -178,8 +190,8 @@ th,td{border-bottom:1px solid var(--divider);padding:9px 12px;text-align:left;ve
 thead th{
   color:var(--text3);
   font-weight:600;
-  font-size:.82rem;
-  letter-spacing:.03em;
+  font-size:.8rem;
+  letter-spacing:.04em;
   text-transform:uppercase;
 }
 tbody td:first-child{color:var(--text);font-weight:600}
@@ -197,11 +209,12 @@ footer p{margin:.3em 0}
 
 @media (max-width:560px){
   .wrap{padding:0 14px}
-  header.bar{padding:24px 0 16px}
-  header.bar .icon{width:64px;height:64px}
-  main.card{padding:26px 20px 24px;border-radius:20px}
-  h1{font-size:1.55rem}
-  h2{font-size:1.15rem}
+  header.bar{padding:26px 0 6px}
+  header.bar .icon{width:68px;height:68px}
+  header.bar .app{font-size:1.7rem}
+  main.card{padding:26px 20px 24px;border-radius:14px}
+  h1{font-size:1.85rem}
+  h2{font-size:1.3rem}
   nav a{padding:6px 14px;font-size:.86rem}
   table{font-size:.88rem}
   th,td{padding:8px 8px}
@@ -210,29 +223,31 @@ footer p{margin:.3em 0}
 </head>
 <body>
 
+<div class="sky">
+  <div class="wrap">
+    <header class="bar">
+      <img class="icon" src="{{ site.baseurl }}/assets/icon.png" width="80" height="80" alt="Seen from Space app icon">
+      <p class="app">Seen from Space</p>
+      <p class="sub">Satellite Map</p>
+      <nav>
+        <a href="{{ site.baseurl }}/"{% if page.url == "/" %} class="here"{% endif %}>Support</a>
+        <a href="{{ site.baseurl }}/privacy"{% if page.url contains "privacy" %} class="here"{% endif %}>Privacy</a>
+        <a href="{{ site.baseurl }}/terms"{% if page.url contains "terms" %} class="here"{% endif %}>Terms</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
 <div class="wrap">
-
-  <header class="bar">
-    <img class="icon" src="{{ site.baseurl }}/assets/icon.png" width="76" height="76" alt="Seen from Space app icon">
-    <p class="app">Seen from Space</p>
-    <p class="sub">Satellite Map</p>
-    <nav>
-      <a href="{{ site.baseurl }}/"{% if page.url == "/" %} class="here"{% endif %}>Support</a>
-      <a href="{{ site.baseurl }}/privacy"{% if page.url contains "privacy" %} class="here"{% endif %}>Privacy</a>
-      <a href="{{ site.baseurl }}/terms"{% if page.url contains "terms" %} class="here"{% endif %}>Terms</a>
-    </nav>
-  </header>
-
   <main class="card">
 {{ content }}
   </main>
 
   <footer>
     <p><a href="mailto:developer.barseghyan@gmail.com">developer.barseghyan@gmail.com</a></p>
-    <p>Contains modified Copernicus Sentinel data.</p>
+    <p>Contains modified Copernicus Sentinel data. US aerial photography: USDA NAIP.</p>
     <p>&copy; {{ site.time | date: "%Y" }} Tigran Barseghyan</p>
   </footer>
-
 </div>
 
 </body>
